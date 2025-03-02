@@ -2,7 +2,7 @@ version: '3.8'
 
 services:
   electrum:
-    image: your-dockerhub-username/electrum:latest 
+    image: ghcr.io/shoya0x00/electrum-docker:latest
     container_name: electrum
     environment:
       - ELECTRUM_USER=electrum

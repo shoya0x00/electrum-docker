@@ -28,14 +28,6 @@ RUN apk update && apk add --no-cache \
     apk del build-base musl gcc && \
     rm -rf /var/cache/apk/*
 
-# Ensure Electrum directories exist
-RUN mkdir -p ${ELECTRUM_HOME}/.electrum/wallets/ \
-    ${ELECTRUM_HOME}/.electrum/testnet/wallets/ \
-    ${ELECTRUM_HOME}/.electrum/regtest/wallets/ \
-    ${ELECTRUM_HOME}/.electrum/simnet/wallets/ && \
-    ln -sf ${ELECTRUM_HOME}/.electrum/ /data && \
-    chown -R ${ELECTRUM_USER}:${ELECTRUM_USER} ${ELECTRUM_HOME}/.electrum /data
-
 # Switch to Electrum user
 USER $ELECTRUM_USER
 WORKDIR $ELECTRUM_HOME
@@ -44,7 +36,6 @@ EXPOSE 7000
 
 # Copy and set permissions for entrypoint
 COPY entrypoint.sh /entrypoint.sh
-RUN chmod +x /entrypoint.sh
 
 # Set entrypoint
 ENTRYPOINT ["/entrypoint.sh"]
