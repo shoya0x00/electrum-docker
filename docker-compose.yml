@@ -1,0 +1,19 @@
+version: '3.8'
+
+services:
+  electrum:
+    image: your-dockerhub-username/electrum:latest 
+    container_name: electrum
+    environment:
+      - ELECTRUM_USER=electrum
+      - ELECTRUM_PASSWORD=electrumz
+      - ELECTRUM_NETWORK=mainnet
+    volumes:
+      - electrum_data:/data
+    ports:
+      - "7000:7000"
+    restart: unless-stopped
+
+volumes:
+  electrum_data:
+    driver: local
